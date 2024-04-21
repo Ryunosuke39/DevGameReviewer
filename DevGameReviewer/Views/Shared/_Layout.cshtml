@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DevGameReviewer</title>
+@*     
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DevGameReviewer.styles.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body class="font-[Poppins]">
+    <div>
+        <header>
+            <div class="flex h-10 w-screen items-center bg-amber-300">
+                <div class="flex">
+                    <div class="px-[1.5vw] pt-[0.7vh] lg:text-lg">
+                        <ion-icon name="menu-outline" class="cursor-pointer" onclick="{Open()}"></ion-icon>
+                    </div>
+                    <a class="text-[0.45rem] pt-[0.4vh] font-semibold md:text-sm lg:text-lg" asp-area="" asp-controller="Home" asp-action="Index">GameDevReview</a>
+                </div>
+                <div class="flex w-screen items-center justify-center text-gray-700 shadow-2xl">
+                    <input type="text" placeholder="Search..." class="w-[30vw] h-[4vh] rounded-l-lg shadow-2xl" />
+                    <button type="submit" class="w-[5vw] h-[4vh] rounded-r-lg bg-gray-900 text-lg text-white"><ion-icon name="search-outline"></ion-icon></button>
+                </div>
+                <div class="flex items-end justify-end px-5">
+                    <button class="bg-[#6C0BA9] w-50 h-7 rounded-full text-base font-semibold text-white hover:bg-[#B24BF3]">
+                        <ion-icon name="log-in-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+            <nav class="text-white">
+                <div class="sidebar fixed bottom-0 top-10 w-2/12 overflow-y-auto bg-gray-900 text-center transition duration-300 ${open?'left-0':'left-[-200px]'}" style="">
+                    <div class="flex flex-col pt-5">
+                        <ul class="text-[0.45rem] space-y-4 font-semibold md:text-xs lg:text-lg">
+                            <li class="sidebar-button item-center clicked flex ${clicked?'bg-amber-500':'bg-gray-900'}" onclick="Select()">
+                                <ion-icon name="home-outline" class="px-[1.5vw] pt-[0.7vh]"></ion-icon>
+                                <a class="nav-link text-dark hover:text-gray-600" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="sidebar-button item-center flex">
+                                <ion-icon name="people-outline" class="px-[1.5vw] pt-[0.7vh]"></ion-icon>
+                                <a class="nav-link text-dark hover:text-gray-600" asp-area="" asp-controller="Home" asp-action="Privacy">Following</a>
+                            </li>
+                            <li class="item-center flex">
+                                <ion-icon name="earth-outline" class="px-[1.5vw] pt-[0.7vh]"></ion-icon>
+                                <a class="nav-link text-dark hover:text-gray-600" asp-area="" asp-controller="Home" asp-action="Index">Ranking</a>
+                            </li>
+                            <li class="item-center flex">
+                                <ion-icon name="add-circle-outline" class="px-[1.5vw] pt-[0.7vh]"></ion-icon>
+                                <a class="nav-link text-dark hover:text-gray-600" asp-area="" asp-controller="Home" asp-action="Privacy">Post Review</a>
+                            </li>
+                            <li class="item-center flex">
+                                <ion-icon name="cart-outline" class="px-[1.5vw] pt-[0.7vh]"></ion-icon>
+                                <a class="nav-link text-dark hover:text-gray-600" asp-area="" asp-controller="Home" asp-action="Privacy">Cart</a>
+                            </li>
+                            <li class="item-center flex">
+                                <ion-icon name="eye-outline" class="px-[1.5vw] pt-[0.7vh]"></ion-icon>
+                                <a class="nav-link text-dark hover:text-gray-600" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="item-center flex">
+                                <ion-icon name="settings-outline" class="px-[1.5vw] pt-[0.7vh]"></ion-icon>
+                                <a class="nav-link text-dark hover:text-gray-600" asp-area="" asp-controller="Home" asp-action="Privacy">Setting</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="insert-y-0 absolute bottom-0">
+                        <hr class="text-gray-600" />
+                        <div class="text-[0.45rem] md:text-xs lg:text-lg">
+                            &copy; 2024 - DevGameReviewer - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </div>
+                    </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+    </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    
+    <script>
+        function Open() {
+            console.log(document.querySelector('.sidebar').classList);
+            // document.querySelector('.sidebar').classList.toggle('left-[-200px]');
+            open = !open;
+            console.log(open);
+        }
+        
+        function Select() {
+            console.log(document.querySelector('.sidebar-button').classList);
+            document.querySelector('.sidebar-button').classList.toggle('clicked');
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
